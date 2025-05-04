@@ -1,0 +1,87 @@
+1回目
+answer the quiz of the person pointing to the left in the living room
+lead Aaron from the bedroom to the living room
+tell me how many people in the living room are wearing blue t shirts
+
+２回目
+introduce yourself to the person wearing a white t shirt in the kitchen and answer a quiz
+tell me how many people raising their right arm are in the office
+answer the quiz of the person pointing to the left in the living room
+
+予備
+tell me how many people in the living room are wearing blue t shirts
+say what the time is to the person raising their right arm in the living room
+tell me the height of the person in the living room
+
+
+見極めできそう
+introduce yourself to the person wearing a white t shirt in the kitchen and answer a quiz
+14,4,15,11,0,10
+
+answer the quiz of the person pointing to the left in the living room
+14,2,15,10
+
+say what the weather is like today to the person pointing to the left in the kitchen
+14,2,12
+
+tell me how many people in the living room are wearing blue t shirts
+14,5,14,13
+
+tell me how many dice there are on the counter
+14,7,13
+
+tell me how many people raising their right arm are in the office
+14,3,14
+
+
+作ればできそう
+tell me the height of the person in the living room
+14,1,6,15,14,13
+
+tell me what is the heaviest cookie on the counter
+14,9,14,13
+
+lead Aaron from the bedroom to the living room
+14,21,17
+
+
+見極めむずそう
+look for a standing person in the bathroom and follow them to the kitchen
+14,2,2,16
+
+greet Jack in the office and follow them to the living room
+14,21,15,11,2,16
+
+
+
+見極め不可（物体把持）
+give me a cup from the desk
+14,18,14,19
+
+look for a cup in the living room then get it and give it to me
+14,8,18,14,19
+
+grasp a cap from the table and put it on the desk
+14,18,14,20
+
+
+
+以下新しいやつ
+tell me how many people in the kitchen are wearing black t shirts
+
+tell me how many cups there are on the shelf (ボトルにしたい)
+
+navigate to the bedroom then find the person looking back and tell what day today is
+
+tell the name of the person at the kitchen to the person at the office ??
+
+say what the result of 3 plus 5 is to the person raising their right arm in the bathroom
+
+answer the question of the person raising their right arm in the living room
+
+say hello to the person wearing a black jacket in the bedroom and say what the result of 3 plus 5 is
+
+
+
+把持
+bring me a noodle from the table
