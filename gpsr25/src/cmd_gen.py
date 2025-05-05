@@ -101,7 +101,7 @@ class CommandGenerator:
     "What is the most spoken language in the world?",
     "What is the correct spelling of robot?",
     "What is the brightest star in the solar system?",
-    "What is the probability of getting a total of 7 when rolling two dice?",
+    # "What is the probability of getting a total of 7 when rolling two dice?",
 
     "Would you like something to drink?",
     "Do you have a favorite color, if I may ask?",

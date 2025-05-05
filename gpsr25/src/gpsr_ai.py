@@ -6,7 +6,7 @@ import sys
 
 import warnings
 obj_it = None
-from utils import *
+# from utils import *
 from config import *
 from cmd_gen import *
 from ex_mod import *
@@ -871,6 +871,7 @@ def replace_unk(description):
 
     # "placemen_unk" を置き換え
     while "placemen_unk" in description:
+        print("description",description)
         if result_placemen:
             replaced_placemen = result_placemen.pop(0)
             description = description.replace("placemen_unk", replaced_placemen, 1)
@@ -1039,260 +1040,20 @@ import sys
 ↓
 やばい
 '''
-# from ask_name_new import run_ask_name_with_params
-# print("test")
-dbg = 0
-if dbg == 1:
-    print("test")
-    time.sleep(3)
-
-    print("😁😁😁😁😁名前探しデバッグ😁😁😁😁⚪")
-    name = "Jack"
-    angle = [0,90,180]
-    find_name(name,angle)
-    input_com = input("次のデバッグ行きますか？:")
-    if input_com == "no":
-        print("^Cを押せ")
-        time.sleep(3)
-    sys.exit()
-
-    # print("😁😁😁😁😁コップ数えデバッグ😁😁😁😁⚪")
-    # obj = "bottlerosr"
-    # saved_info = count_object(obj)
-    # give_saved_info(saved_info)
-    # input_com = input("次のデバッグ行きますか？:")
-    # if input_com == "no":
-    #     print("^Cを押せ")
-    #     time.sleep(3)
-    # sys.exit()
-
-    # print("😁😁😁😁😁部屋中モノ探しデバッグ😁😁😁⚪🟡")
-    # now_room = "living room"
-    # obj = "cup"
-    # find_object(obj, now_room)
-    # input_com = input("次のデバッグ行きますか？:")
-    # if input_com == "no":
-    #     print("^Cを押せ")
-    #     time.sleep(3)
-
-    # print("😁😁😁😁😁モノつかみデバッグ😁😁😁😁⚪")
-    # obj = "red cup"
-    # pick_object(obj)
-    # sys.exit()
-    # input_com = input("次のデバッグ行きますか？:")
-    # if input_com == "no":
-    #     print("^Cを押せ")
-    #     time.sleep(3)
-
-    # print("😁😁😁😁😁物体配置デバッグ😁😁😁😁⚪")
-    # put_pl = "table"
-    # put_object(put_pl)
-    # sys.exit()
-
-    '''
-    print("😁😁😁😁😁もの特徴デバッグ😁😁😁😁🔴")
-    obj_comp = "tall"
-    saved_info = find_feature(obj_comp,obj)
-    give_saved_info(saved_info)
-    '''
-
-    input_com = input("input: ")
-    import time 
-    for i in range(3):
-        time.sleep(1)
-elif dbg == 2:
-    print("test2")
-    num = int(input("実行したい関数の番号を入力してください（0～20）: "))
-
-    if num == 0:#ok?
-        print("🔧 実行: find_person()")
-        find_person()
-
-    elif num == 1:#ok
-        print("🔧 実行: find_pose(person)")
-        person = input("ポーズ名: ")
-        find_pose(person,None)
-
-    elif num == 2:#ok
-        print("🔧 実行: count_pose(person)")
-        person = input("ポーズ名: ")
-        saved_info = count_pose(person)
-
-    elif num == 3:#ok
-        print("🔧 実行: find_color_cloth(color, clothe)")
-        color = input("色: ")
-        clothe = input("服: ")
-        find_color_cloth(color, clothe)
-
-    elif num == 4:#ok
-        print("🔧 実行: count_color_cloth(color, clothe)")
-        color = input("色: ")
-        clothe = input("服: ")
-        saved_info = count_color_cloth(color, clothe)
-
-    elif num == 5:#進む距離治ればOK
-        print("🔧 実行: find_name(name, angle)")
-        name = input("名前: ")
-        find_name(name)
-
-    elif num == 6:#おそらくok？　名前のやつできればOK
-        print("🔧 実行: find_info(person_info)")
-        person_info = input("人物情報: ")
-        saved_info = find_info(person_info)
-
-    elif num == 7:#okだけど、v8次第　首の角度
-        print("🔧 実行: count_object(obj)")
-        obj = input("物体名: ")
-        saved_info = count_object(obj)
-
-    elif num == 8:#これ動きはしたけど、今の環境ではちょっと
-        print("🔧 実行: find_object(obj, now_room)")
-        obj = input("物体名: ")
-        now_room = input("現在の部屋名: ")
-        find_object(obj, now_room)
-
-    elif num == 9:#okじゃないけどok　GPTでやるかな
-        print("🔧 実行: find_feature(obj_comp, obj)")
-        obj_comp = input("比較対象を入力してください: ")
-        obj = input("物体名を入力してください: ")
-        saved_info = find_feature(obj_comp, obj)
-
-    elif num == 10:#ok
-        print("🔧 実行: greet_selfintro()")
-        greet_selfintro()
-
-    elif num == 11:#ok
-        print("🔧 実行: give_info(talk)")
-        talk = input("話す内容: ")
-        give_info(talk)
-
-    elif num == 12:#ok
-        print("🔧 実行: answer_question()")
-        answer_question()
-
-    elif num == 13:#ok
-        print("🔧 実行: give_saved_info(saved_info)")
-        saved_info = input("保存された情報を入力してください: ")
-        give_saved_info(saved_info)
-
-    elif num == 14:#ok
-        print("🔧 実行: navigate(rooms)")
-        rooms = input("移動先: ").split(',')
-        navigate(rooms)
-
-    elif num == 15:#ok
-        print("🔧 実行: approach_person()")
-        approach_person()
-
-    elif num == 16:#ok
-        print("🔧 実行: follow_person(rooms)")
-        # rooms_input = input("追従先（空欄で全体）: ")
-        # rooms = rooms_input.split(',') if rooms_input else None
-        follow_person(rooms)
-
-    elif num == 17:#ok
-        print("🔧 実行: guide(rooms)")
-        rooms = input("案内する部屋名: ").split(',')
-        guide(rooms)
-
-    elif num == 18:#ok
-        print("🔧 実行: pick_object(obj)")
-        obj = input("持ち上げる物体名: ")
-        pick_object(obj)
-
-    elif num == 19:#ok
-        print("🔧 実行: hand_object()")
-        hand_object()
-
-    elif num == 20:#ok
-        print("🔧 実行: put_object(put_pl)")
-        put_pl = input("置く場所: ")
-        put_object(put_pl)
-
-    else:
-        print("⚠ 無効な番号です。0～20の範囲で入力してください。")
-
-    give_saved_info(saved_info)
-    print(saved_info)
-    sys.exit()
-
-elif dbg == 3:
-    tts_pub2("Hello my name is mmimimimimimimimimimimimimimimimi")
-    rospy.sleep(5)
-    sys.exit()
-# #     find_name_dbg("jack")
-# #     sys.exit()
-#     pick_object("red cup")
-# print("これがひょうじされたら異常！！！！")
-# sys.exit()
-
-        
 
 
-count = 0
+
+import time  # 時間を扱うモジュール
+
+# 開始時刻を記録
+start_time = time.time()
 
 # コマンド生成とカウント
-for _ in range(3):
-    print(count)
-    
-    # input_text = cmd_gen.generate_command_start()
-    # input_text = "tell me how many people in the living room are wearing black jackets"#1
-    #まあまあ
-    # input_text = "greet the person wearing a black jackets in the kitchen and answer a quiz"
-    #人探索ができないうーん
-    # input_text = "look for a person raising their right arm in the office and answer a question"
-    #全くできないわけではないが人探索が
-    # input_text = "go to the living room then find the person crossing one's arms and tell where RoboCup is held this year"
-    #できた
-    # input_text = "tell something about yourself to the person giving the v sign in the bathroom"
-    #できた
-    # input_text = "give me a cup from the table"
-
-    '''
-    input_text = input_com()
-#
-
+for i in range(10000):
+    print(i)
+    from config import *
     
 
-    output_text, verbs_found = replace_text(input_text)
-
-    # 入力の出力（テスト用）
-    print("in :",input_text)
-
-    #print("out :",output_text)
-
-    # `output_text_list` に `output_text` を追加
-    output_text_list.append(output_text)
-
-    for segment in output_text:
-        mapped_command = match_segment_with_manual_mapping(segment)
-        #(f"{segment.upper()} → {mapped_command}")
-
-
-    result_objects = extract_in_order_with_duplicates(input_text, objects, special_words)
-    result_rooms = extract_in_order_with_duplicates(input_text, rooms, special_words)
-    result_names = extract_in_order_with_duplicates(input_text, names, special_words)
-    result_placemen = extract_in_order_with_duplicates(input_text, placemen, special_words)
-    result_person = extract_in_order_with_duplicates(input_text, person, special_words)
-    result_talk = extract_in_order_with_duplicates(input_text, talk, special_words)
-    result_person_info = extract_in_order_with_duplicates(input_text, person_info, special_words)
-
-    result_object_comp = extract_in_order_with_duplicates(input_text, object_comp, special_words)
-    result_color_list = extract_in_order_with_duplicates(input_text, color_list, special_words)
-    result_clothe_list = extract_in_order_with_duplicates(input_text, clothe_list, special_words)
-
-    # 最後の要素を3つに増やす処理
-    if result_objects: 
-        last_elementOJ = result_objects[-1]  
-        result_objects.extend([last_elementOJ] * 2)
-
-    if result_rooms: 
-        last_element = result_rooms[-1]  
-        result_rooms.extend([last_element] * 2)
-
-    output_text, verbs_found = replace_text(input_text)
-    seg_num = 0
-    '''
     input_text = input_com()
     input_text = input_text.replace("?", "")
 
@@ -1378,12 +1139,20 @@ for _ in range(3):
 
     print("\n--- 完了 ---")
     
-    seg_num += 1
-    count = int(os.environ.get("RESTART_COUNT", "0"))
-    if count < 100:
-        os.environ["RESTART_COUNT"] = str(count + 1)
-        os.execv(sys.executable, [sys.executable] + sys.argv)
-    else:
-        print("これ以上は再実行しません。")
+    # seg_num += 1
+    # count = int(os.environ.get("RESTART_COUNT", "0"))
+    # if count < 100:
+    #     os.environ["RESTART_COUNT"] = str(count + 1)
+    #     os.execv(sys.executable, [sys.executable] + sys.argv)
+    # else:
+    #     print("これ以上は再実行しません。")
 
 #navigate to the bedroom then find a phone stand and fetch it and bring it to the person crossing one's arms in the study room
+    
+end_time = time.time()
+
+# 経過時間を計算
+elapsed_time = end_time - start_time
+
+# 秒数を表示
+print(f"処理にかかった時間：{elapsed_time:.2f} 秒")

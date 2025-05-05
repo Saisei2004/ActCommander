@@ -1,6 +1,6 @@
 #ここに変数tell me what is the biggest potato chip on the shelf
 
-from utils import *
+# from utils import *
 
 objects = [
     # # "noodle", "noodles", "potato_chip", "potato_chips", "cookie", "cookies", "cracker", "crackers", 
@@ -74,7 +74,7 @@ talk = [
     "what is the most spoken language in the world",
     "what is the correct spelling of robot",
     "what is the brightest star in the solar system",
-    "what is the probability of getting a total of 7 when rolling two dice",
+    # "what is the probability of getting a total of 7 when rolling two dice",
     "would you like something to drink",
     "do you have a favorite color, if i may ask",
     "is there a time you need to be heading home today",
