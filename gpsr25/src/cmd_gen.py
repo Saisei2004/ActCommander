@@ -406,7 +406,38 @@ object_categories_plural = ["cookies", "noodles", "potato chips", "caramel corn"
 
 
 # インスタンスを作成
-generator = CommandGenerator(
+# generator = CommandGenerator(
+#     person_names=person_names,
+#     location_names=location_names,
+#     placement_location_names=placement_location_names,
+#     room_names=room_names,
+#     object_names=object_names,
+#     object_categories_plural=object_categories_plural,
+#     object_categories_singular=object_categories_singular
+# )
+
+# # コマンドを1つ生成して表示
+# cmd = generator.generate_command_start()
+# print(cmd)
+
+import random
+import math
+
+# ==== ランダムコマンド生成（あなたの元コード）====
+# locations = ['kitchen', 'living room', 'study room', 'bedroom']
+# actions = ['go to', 'bring', 'take', 'tell me', 'find']
+# objects = ['cup', 'book', 'apple', 'remote control']
+
+def generate_random_command():
+    """ランダムなコマンド文字列を生成"""
+    # action = random.choice(actions)
+    # if action in ['go to', 'find']:
+    #     return f"{action} the {random.choice(locations)}"
+    # elif action == 'tell me':
+    #     return f"{action} about the {random.choice(objects)}"
+    # else:
+    #     return f"{action} the {random.choice(objects)} from the {random.choice(locations)}"]
+    generator = CommandGenerator(
     person_names=person_names,
     location_names=location_names,
     placement_location_names=placement_location_names,
@@ -415,6 +446,37 @@ generator = CommandGenerator(
     object_categories_plural=object_categories_plural,
     object_categories_singular=object_categories_singular
 )
+    cmd = generator.generate_command_start()
+    return cmd
 
-# コマンドを1つ生成して表示
-print(generator.generate_command_start())
+# ==== Nを推定する関数 ====
+def estimate_total_command_types(k):
+    """k回で重複が起きたときの、総種類数Nの推定"""
+    return (2 * k**2) / math.pi
+
+# ==== 試行を10回行って推定 ====
+estimated_ns = []
+
+for trial in range(100000):
+    print(f"\n🌀 試行 {trial + 1} 開始")
+    seen_cmds = set()
+    count = 0
+
+    while True:
+        cmd = generate_random_command()
+        count += 1
+        print(f"  ➤ 生成 {count} 回目: {cmd}")
+
+        if cmd in seen_cmds:
+            print("  ⚠️ 重複を検出。試行を終了。")
+            break
+        seen_cmds.add(cmd)
+
+    estimated_n = estimate_total_command_types(count)
+    estimated_ns.append(estimated_n)
+    print(f"📐 この試行から推定されたコマンド総数 ≈ {estimated_n:.2f}")
+
+# ==== 平均をとって表示 ====
+average_estimate = sum(estimated_ns) / len(estimated_ns)
+print("\n==========================")
+print(f"🎯 平均的な推定コマンド種類数 ≈ {average_estimate:.2f}")
