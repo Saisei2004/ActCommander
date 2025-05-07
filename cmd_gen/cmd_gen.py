@@ -2,7 +2,16 @@ import random
 import re
 import itertools
 import warnings
-
+from ans import *
+from clothing import *
+from color import *
+from names import * 
+from obj_names import *
+from placement import *
+from pose import *
+from room import *
+from talk import *
+from gestures import *
 
 class CommandGenerator:
 
@@ -53,40 +62,24 @@ class CommandGenerator:
 
     connector_list = ["and"]
 
-    # gesture_person_list = ["waving person", "person raising their left arm", "person raising their right arm",
-    #                        "person pointing to the left", "person pointing to the right"]
-    gesture_person_list = ["person raising their right arm", "person pointing to the left",
-                           "person giving the V sign"]
+    gesture_person_list = person_gestures
 
-    # pose_person_list = ["sitting person", "standing person", "lying person"]
-    pose_person_list = ["sitting person", "standing person", "squatting person",
-                        "person looking back", "person crossing one's arms"]
+    pose_person_list = human_poses
 
-    # Ugly...
-    # gesture_person_plural_list = ["waving persons", "persons raising their left arm", "persons raising their right arm",
-    #                               "persons pointing to the left", "persons pointing to the right"]
-    gesture_person_plural_list = ["people raising their right arm", "people pointing to the left",
-                                  "people giving the V sign"]
-    
-    # pose_person_plural_list = ["sitting persons", "standing persons", "lying persons"]
-    pose_person_plural_list = ["sitting people", "standing people", "squatting people",
-                               "people looking back", "people crossing one's arms"]
+    gesture_person_plural_list = person_gestures
 
-    # person_info_list = ["name", "pose", "gesture"]
-    person_info_list = ["name", "shirt color", "age", "height"]
+    pose_person_plural_list = human_poses
+
+    person_info_list = ["name", "shirt color", "age", "height","pose", "gesture"]
     object_comp_list = ["biggest", "largest", "smallest", "heaviest", "lightest", "thinnest"]
 
-    # talk_list = ["something about yourself", "the time", "what day is today", "what day is tomorrow", "your teams name",
-    #              "your teams country", "your teams affiliation", "the day of the week", "the day of the month"]
-    talk_list = ["something about yourself", "what day today is", "what day tomorrow is",
-                 "where RoboCup is held this year", "what the result of 3 plus 5 is", "your team's name",
-                 "where you come from", "what the weather is like today", "what the time is"]
+    talk_list = robot_question_topics
 
     question_list = ["question", "quiz"]
 
-    color_list = ["blue", "yellow", "black", "white", "red", "orange", "gray"]
-    clothe_list = ["t shirt", "shirt", "blouse", "sweater", "coat", "jacket"]
-    clothes_list = ["t shirts", "shirts", "blouses", "sweaters", "coats", "jackets"]
+    color_list = color_names
+    clothe_list = clothing_items
+    clothes_list = clothing_items_plural
     color_clothe_list = []
     for (a, b) in list(itertools.product(color_list, clothe_list)):
         color_clothe_list = color_clothe_list + [a + " " + b]
@@ -96,20 +89,13 @@ class CommandGenerator:
 
     def generate_command_start(self, cmd_category="", difficulty=0):
         cmd_list = []
-        # cmd_list = ["goToLoc", "takeObjFromPlcmt", "findPrsInRoom", "findObjInRoom", "meetPrsAtBeac", "countObjOnPlcmt",
-        #             "countPrsInRoom", "tellPrsInfoInLoc", "tellObjPropOnPlcmt", "talkInfoToGestPrsInRoom",
-        #             "answerToGestPrsInRoom", "followNameFromBeacToRoom", "guideNameFromBeacToBeac",
-        #             "guidePrsFromBeacToBeac", "guideClothPrsFromBeacToBeac", "bringMeObjFromPlcmt",
-        #             "tellCatPropOnPlcmt", "greetClothDscInRm", "greetNameInRm", "meetNameAtLocThenFindInRm",
-        #             "countClothPrsInRoom", "countClothPrsInRoom", "tellPrsInfoAtLocToPrsAtLoc", "followPrsAtLoc"]
 
-        # HRI and people perception commands
         person_cmd_list = ["goToLoc", "findPrsInRoom", "meetPrsAtBeac", "countPrsInRoom", "tellPrsInfoInLoc",
                            "talkInfoToGestPrsInRoom", "answerToGestPrsInRoom", "followNameFromBeacToRoom",
                            "guideNameFromBeacToBeac", "guidePrsFromBeacToBeac", "guideClothPrsFromBeacToBeac",
                            "greetClothDscInRm", "greetNameInRm", "meetNameAtLocThenFindInRm", "countClothPrsInRoom",
                            "countClothPrsInRoom", "tellPrsInfoAtLocToPrsAtLoc", "followPrsAtLoc"]
-        # Object manipulation and perception commands
+        
         object_cmd_list = ["goToLoc", "takeObjFromPlcmt", "findObjInRoom", "countObjOnPlcmt", "tellObjPropOnPlcmt",
                            "bringMeObjFromPlcmt", "tellCatPropOnPlcmt"]
 
@@ -367,13 +353,13 @@ class CommandGenerator:
         
 if __name__ == "__main__":
     # Sample data for testing
-    person_names = ["John", "Alice", "Bob"]
-    location_names = ["kitchen", "living room", "bedroom"]
-    placement_location_names = ["table", "shelf", "tall table"]
-    room_names = ["room1", "room2", "room3"]
-    object_names = ["cup", "bottle",]
-    object_categories_plural = ["cups", "books", "pens"]
-    object_categories_singular = ["cup", "book", "pen"]
+    person_names = names
+    location_names = room_and_place
+    placement_location_names = place_names_cleaned
+    room_names = room_names
+    object_names = graspable_objects
+    object_categories_plural = graspable_objects_plural
+    object_categories_singular = graspable_objects
 
     generator = CommandGenerator(person_names, location_names, placement_location_names, room_names,
                                  object_names, object_categories_plural, object_categories_singular)
@@ -425,3 +411,63 @@ if __name__ == "__main__":
         print()
 
 
+import random
+import math
+
+# ==== ランダムコマンド生成（あなたの元コード）====
+# locations = ['kitchen', 'living room', 'study room', 'bedroom']
+# actions = ['go to', 'bring', 'take', 'tell me', 'find']
+# objects = ['cup', 'book', 'apple', 'remote control']
+
+def generate_random_command():
+    """ランダムなコマンド文字列を生成"""
+    # action = random.choice(actions)
+    # if action in ['go to', 'find']:
+    #     return f"{action} the {random.choice(locations)}"
+    # elif action == 'tell me':
+    #     return f"{action} about the {random.choice(objects)}"
+    # else:
+    #     return f"{action} the {random.choice(objects)} from the {random.choice(locations)}"]
+    generator = CommandGenerator(
+    person_names=person_names,
+    location_names=location_names,
+    placement_location_names=placement_location_names,
+    room_names=room_names,
+    object_names=object_names,
+    object_categories_plural=object_categories_plural,
+    object_categories_singular=object_categories_singular
+)
+    cmd = generator.generate_command_start()
+    return cmd
+
+# ==== Nを推定する関数 ====
+def estimate_total_command_types(k):
+    """k回で重複が起きたときの、総種類数Nの推定"""
+    return (2 * k**2) / math.pi
+
+# ==== 試行を10回行って推定 ====
+estimated_ns = []
+
+for trial in range(10000):
+    print(f"\n🌀 試行 {trial + 1} 開始")
+    seen_cmds = set()
+    count = 0
+
+    while True:
+        cmd = generate_random_command()
+        count += 1
+        print(f"  ➤ 生成 {count} 回目: {cmd}")
+
+        if cmd in seen_cmds:
+            print("  ⚠️ 重複を検出。試行を終了。")
+            break
+        seen_cmds.add(cmd)
+
+    estimated_n = estimate_total_command_types(count)
+    estimated_ns.append(estimated_n)
+    print(f"📐 この試行から推定されたコマンド総数 ≈ {estimated_n:.2f}")
+
+# ==== 平均をとって表示 ====
+average_estimate = sum(estimated_ns) / len(estimated_ns)
+print("\n==========================")
+print(f"🎯 平均的な推定コマンド種類数 ≈ {average_estimate:.2f}")

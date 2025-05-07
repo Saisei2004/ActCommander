@@ -5,6 +5,8 @@ import smach_ros
 import rospy
 from std_msgs.msg import Int32
 
+
+
 #########################################
 person_names = ["Yoshimura", "Angel", "Basil", "Chikako", "Andrew", "Sophia", "Jack", "Mike", "Leo", "Tom"]
 location_names = ["dining room", "living room", "bedroom", "study room"]
@@ -17,6 +19,15 @@ object_categories_plural = ["cookies", "noodles", "potato chips", "caramel corn"
 
 import random
 #########################################
+def result_random():
+    result = random.choices(
+        ["success", "recoverable_failure", "unrecoverable_failure", "error"],
+        weights=[6, 2, 1, 1]
+    )[0]
+
+    # print("結果:", result)
+    return result
+
 
 rospy.loginfo("ノードが起動しました")
 from cmd_gen import *
@@ -68,8 +79,33 @@ def count_color_cloth(color,clothe):#CountColorCloth
     value = random.choices([True, False], weights=[7, 3])[0]
     return value
 
-def find_info(person_info):#FindInfo
-    print(f"目の前の人の{person_info}の特徴を取得する")
+# def find_info(person_info):#FindInfo
+#     print(f"目の前の人の{person_info}の特徴を取得する")
+#     value = random.choices([True, False], weights=[7, 3])[0]
+#     return value
+
+def estimate_height():
+    print("目の前の人の身長を求める")
+    value = random.choices([True, False], weights=[7, 3])[0]
+    return value
+
+def get_person_name():
+    print("目の前の人に名前を聞く")
+    value = random.choices([True, False], weights=[7, 3])[0]
+    return value
+
+def estimate_age():
+    print("目の前の人の年齢を求める")
+    value = random.choices([True, False], weights=[7, 3])[0]
+    return value
+# "pose", "gesture"
+def estimate_gesture_pose():
+    print("目の前の人のジェスチャーもしくはポーズを求める")
+    value = random.choices([True, False], weights=[7, 3])[0]
+    return value
+
+def estimate_shirt_color():
+    print("目の前の人のシャツカラーを求める")
     value = random.choices([True, False], weights=[7, 3])[0]
     return value
 
@@ -153,47 +189,77 @@ def find_name(name):#FindName
     value = random.choices([True, False], weights=[7, 3])[0]
     return value
 
-def guest_intro(name,add_info = None):
-    if add_info != None:
-        print(f"{name}を紹介し,追加情報：{add_info}を伝える。")
-    else:
-        print(f"{name}を紹介する")
-    value = random.choices([True, False], weights=[7, 3])[0]
-    return value
+# def guest_intro(name,add_info = None):
+#     if add_info != None:
+#         print(f"{name}を紹介し,追加情報：{add_info}を伝える。")
+#     else:
+#         print(f"{name}を紹介する")
+#     value = random.choices([True, False], weights=[7, 3])[0]
+#     return value
 
-def enter_room():
-    print("ドアが空いたら入場する")
-    value = random.choices([True, False], weights=[7, 3])[0]
-    return value
+# def enter_room():
+#     print("ドアが空いたら入場する")
+#     value = random.choices([True, False], weights=[7, 3])[0]
+#     return value
 
-def free_talk(talk):
-    print(f"{talk}としゃべる")
-    value = random.choices([True, False], weights=[7, 3])[0]
-    return value
+# def free_talk(talk):
+#     print(f"{talk}としゃべる")
+#     value = random.choices([True, False], weights=[7, 3])[0]
+#     return value
 
-def image_info(prompt):
-    print(f"{prompt}の情報をもとに画像認識を行う")
-    value = random.choices([True, False], weights=[7, 3])[0]
-    return value
+# def image_info(prompt):
+#     print(f"{prompt}の情報をもとに画像認識を行う")
+#     value = random.choices([True, False], weights=[7, 3])[0]
+#     return value
 
-def free_ask(talk):
-    print(f"{talk}と言って、自由な回答を求める")
-    value = random.choices([True, False], weights=[7, 3])[0]
-    return value
+# def free_ask(talk):
+#     print(f"{talk}と言って、自由な回答を求める")
+#     value = random.choices([True, False], weights=[7, 3])[0]
+#     return value
 
-def ask_yesno(talk):
-    print(f"{talk}と言って、yes/noの回答を求める")
-    value = random.choices([True, False], weights=[7, 3])[0]
-    return value
+# def ask_yesno(talk):
+#     print(f"{talk}と言って、yes/noの回答を求める")
+#     value = random.choices([True, False], weights=[7, 3])[0]
+#     return value
 
 def get_comfig(config):
     print(f"{config}の情報を取得する")
     value = random.choices([True, False], weights=[7, 3])[0]
     return value
 
-def open_door():
-    print("ドアを開ける")
-    value = random.choices([True, False], weights=[7, 3])[0]
-    return value
+# def open_door():
+#     print("ドアを開ける")
+#     value = random.choices([True, False], weights=[7, 3])[0]
+#     return value
 
-def 
+# def mimi_dance():
+#     print("ダンスを踊る")
+#     value = random.choices([True, False], weights=[7, 3])[0]
+#     return value
+
+# def face_save():
+#     print("顔を覚える")
+#     value = random.choices([True, False], weights=[7, 3])[0]
+#     return value
+
+# def face_check():
+#     print("人物を判定する")
+#     value = random.choices([True, False], weights=[7, 3])[0]
+#     return value
+
+# def look_at_face():
+#     print("顔の方向を向く")
+#     value = random.choices([True, False], weights=[7, 3])[0]
+#     return value
+
+# def point_arm():
+#     print("アームを非同期で3秒伸ばして案内する")
+#     value = random.choices([True, False], weights=[7, 3])[0]
+#     return value
+
+'''
+6割成功
+2割復帰可能な失敗
+１割復帰不可な失敗
+１割エラー
+'''

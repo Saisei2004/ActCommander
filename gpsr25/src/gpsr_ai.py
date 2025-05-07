@@ -102,7 +102,7 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
     
     if command == "answerQuestion":
         print(command_color + "目の前の人の質問に答える" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         
         '''
         目の前を見る
@@ -116,7 +116,7 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
     
     elif command == "answerToGestPrsInRoom":
         print(command_color + f"{rooms_1}にいる{person}の人の質問に答える" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         あるポーズの人の場所を特定
@@ -131,13 +131,14 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
         elif person in person_list:
             find_pose(person,rooms_1)
         approach_person()
+        look_person()
         answer_question()
         now_room = rooms_1
 
     
     elif command == "countPrsInRoom":
         print(command_color + f"{rooms_1}にいる{person}を数えてオペレーターに伝える" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         あるポーズの人を数える
@@ -147,12 +148,13 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
         navigate(rooms_1)
         saved_info = count_pose(person)
         navigate(operator)
+        look_person()
         give_saved_info(saved_info)
         now_room = rooms_1
     
     elif command == "countClothPrsInRoom":
         print(command_color + f"{rooms_1}にいる{color}色の{clothe}を着ている人の数をオペレーターに伝える" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         ある色のある服を着ている人を数える
@@ -162,13 +164,13 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
         navigate(rooms_1)
         saved_info = count_color_cloth(color,clothe)
         navigate(operator)
-        # saved_info = "aaaaaaaaaaaaaaaaaa"
+        look_person()
         give_saved_info(saved_info)
         now_room = rooms_1
     
     elif command == "countObjOnPlcmt":
         print(command_color + f"{placemen}の上にある{obj}の数をオペレーターに伝える" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         あるのものの数を数える
@@ -177,11 +179,12 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
         navigate(placemen)
         saved_info = count_object(obj)
         navigate(operator)
+        look_person()
         give_saved_info(saved_info)
     
     elif command == "bringMeObjFromPlcmt":
         print(command_color + f"{placemen}にある{obj}をオペレーターにもっていく" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         あるものを掴む
@@ -191,52 +194,55 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
         navigate(placemen)
         pick_object(obj)
         navigate(operator)
+        look_person()
         hand_object()
 
     
     elif command == "deliverObjToMe":
         print(command_color + f"{obj}をオペレーターに持っていく" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         渡す
         '''
         navigate(operator)
+        look_person()
         hand_object()
     
     elif command == "deliverObjToPrsInRoom":
         print(command_color + f"{rooms_1}にいる{person}にそれを持っていく" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
-        あるポーズをしている人を探す
+        ある人を探す
         渡す
         '''
         navigate(rooms_1)
         if person == "them":
-            pass
+            look_person()
         elif person in names:
             find_name(person)
+            look_person()
         elif person in person_list:
             find_pose(person,rooms_1)
+            look_person()
         hand_object()
         now_room = rooms_1
 
     
     elif command == "findObj":
         print(command_color + f"{obj}を見つける" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         あるものを探す
         '''
         if obj == None:
             obj = input_text
         find_fin = find_object(obj,now_room)
-        print("これが見たかった！！")
     
     elif command == "findObjInRoom":
         print(command_color + f"{rooms_1}で{obj}を見つける" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         あるものを探す
@@ -249,50 +255,55 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
     
     elif command == "findPrs":
         print(command_color + f"{person}をその場で探す" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         あるポーズの人を探す
         '''
         if person == "them":
+            look_person()
             pass
         elif person in names:
             find_name(person)
+            look_person()
         elif person in person_list:
             find_pose(person,None)
+            look_person()
     
     elif command == "findPrsInRoom":
         print(command_color + f"{person}を{rooms_1}で探す" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         あるポーズの人を探す
         '''
         navigate(rooms_1)
         if person == "them":
+            look_person()
             pass
         elif person in names:
             find_name(person)
+            look_person()
         elif person in person_list:
             find_pose(person,rooms_1)
         now_room = rooms_1
     
     elif command == "followPrs":
         print(command_color + f"{name}についていく" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         目の前の人を見る
         名前を聞いて人を特定する
         人追従
         '''
-        look_person()
         if name != "them":
             find_name(name)
+        look_person()
         follow_person()
         now_name = name
     
     elif command == "followPrsAtLoc":
         print(command_color + f"{rooms_1}の{person}についていく" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         人を探す
@@ -305,14 +316,14 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
         elif person in names:
             find_name(person)
         elif person in person_list:
-            find_pose(person,rooms_1)        
-        approach_person()
+            find_pose(person,rooms_1)      
+        look_person()
         follow_person()
         now_room = rooms_1
     
     elif command == "followNameFromBeacToRoom":
         print(command_color + f"{name}を{rooms_1}から{rooms_2}についていく" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         目の前の人を見る
@@ -320,16 +331,16 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
         人追従
         '''
         navigate(rooms_1)
-        look_person()
         if name != "them":
             find_name(name)
+        look_person()
         follow_person()
         now_room = rooms_1
         now_name = name
     
     elif command == "followPrsToRoom":
         print(command_color + f"{rooms_1}まで{person}についていく" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         あるポーズの人を探す
         人追従
@@ -340,14 +351,14 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
             find_name(person)
         elif person in person_list:
             find_pose(person,None)
-
+        look_person()
         follow_person(rooms_1)
         now_room = rooms_1
         
     
     elif command == "goToLoc":
         print(command_color + f"{rooms_1}に行く" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         '''
@@ -356,7 +367,7 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
     
     elif command == "greetClothDscInRm":
         print(command_color + f"{rooms_1}にいる{color}色の{clothe}を着ている人にhelloと言う" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         ある色のある服を着ている人を探す
@@ -366,12 +377,13 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
         navigate(rooms_1)
         find_color_cloth(color,clothe)
         approach_person()
+        look_person()
         greet_selfintro()
         now_room = rooms_1
     
     elif command == "greetNameInRm":
         print(command_color + f"{rooms_1}にいる{name}にhelloを言う" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         名前確認
@@ -383,6 +395,7 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
         if name != "them":
             find_name(name)
         approach_person()
+        look_person()
         greet_selfintro()
         now_room = rooms_1
         now_name = name
@@ -390,7 +403,7 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
     
     elif command == "guideClothPrsFromBeacToBeac":
         print(command_color + f"{color}色の{clothe}を着ている人を{rooms_1}から{rooms_2}についていく" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         ある色のある服の人を探す
@@ -398,62 +411,66 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
         '''
         navigate(rooms_1)
         find_color_cloth(color,clothe)
+        look_person()
         follow_person(rooms_2)
         now_room = rooms_2
     
     elif command == "guideNameFromBeacToBeac":
         print(command_color + f"{name}を{rooms_1}から{rooms_2}に案内する" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         名前確認
         移動する（案内）
         '''
         navigate(rooms_1)
-        print(name)
+        # print(name)
         if name == "them":
             pass
         elif name in person_list:
             find_pose(name,None)
         elif name != "them":
             find_name(name)
+        look_person()
         guide(rooms_2)
         now_room = rooms_2
         now_name = name
     
     elif command == "guidePrsToBeacon":
         print(command_color + f"{name}を{rooms_1}に案内する" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         名前確認
         移動する（案内）
         '''
-        print(type(name),name)
+        # print(type(name),name)
         if name == "them":
             pass
         elif name in person:
             find_pose(name)
         elif name != "them":
             find_name(name)
+        look_person()
         guide(rooms_1)
         now_room = rooms_1
         now_name = name
     
     elif command == "meetName":
         print(command_color + f"その場で{name}に会う" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         名前確認
         挨拶
         '''
         if name != "them":
             find_name(name)
+        look_person()
         greet_selfintro()
         now_name = name
     
     elif command == "meetNameAtLoc":
         print(command_color + f"{rooms_1}で{name}に会う" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動
         名前確認
@@ -462,13 +479,14 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
         navigate(rooms_1)
         if name != "them":
             find_name(name)
+        look_person()
         greet_selfintro()
         now_room = rooms_1
         now_name = name
     
     elif command == "meetPrsAtBea":
         print(command_color + f"{rooms_1}で{name}に会う" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動
         名前確認
@@ -477,13 +495,14 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
         navigate(rooms_1)
         if name != "them":
             find_name(name)
+        look_person()
         greet_selfintro()
         now_room = rooms_1
         now_name = name
     
     elif command == "placeObjOnPlcmt":
         print(command_color + f"{obj}を{placemen}の上に置く" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         家具の上に置く
@@ -493,7 +512,7 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
     
     elif command == "takeObjFromPlcmt":
         print(command_color + f"{obj}を{placemen}からとる" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         あるのもを取る
@@ -503,7 +522,7 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
     
     elif command == "takeObj":
         print(command_color + f"{obj}をとる" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         あるものを取る
         '''
@@ -514,11 +533,12 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
     
     elif command == "talkInfo":
         print(command_color + f"{talk}を伝える" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         情報を伝える
         '''
         approach_person()
+        look_person()
         if talk == None:
             give_saved_info(saved_info)
         else:
@@ -527,7 +547,7 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
     
     elif command == "tellCatPropOnPlcmt":
         print(command_color + f"オペレーターに{placemen}の上の{obj_comp}の{obj}がどれか伝える" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         ある特徴のあるもののソートを特定する
@@ -541,7 +561,7 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
     
     elif command == "tellObjPropOnPlcmt":
         print(command_color + f"オペレーターに{placemen}の上の{obj_comp}の{obj}がどれか伝える" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         ある特徴のあるもののソートを特定する
@@ -555,7 +575,7 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
     
     elif command == "tellPrsInfoInLoc":
         print(command_color + f"オペレーターに{rooms_1}にいる人の{person_info}を伝える" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         人を見つける
@@ -567,15 +587,26 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
         navigate(rooms_1)
         find_person()
         approach_person()
-        saved_info = find_info(person_info)      
+        look_person()
+        if person_info == "hight":
+            estimate_height()
+        elif person_info == "age":
+            estimate_age()
+        elif person_info == "gesture" or "pose":
+            estimate_gesture_pose()
+        elif name == "name":
+            get_person_name()
+        elif person_info == "shirt color":
+            estimate_shirt_color()
         navigate(operator)
+        look_person()
         give_saved_info(saved_info)
         now_room = rooms_1
 
     
     elif command == "tellPrsInfoAtLocToPrsAtLoc":
         print(command_color + f"{rooms_1}にいる人の{person_info}を{rooms_2}にいる人に伝える" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         人を見つける
@@ -589,16 +620,27 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
         navigate(rooms_1)
         find_person()
         approach_person()
-        saved_info = find_info(person_info)
+        look_person()
+        if person_info == "hight":
+            estimate_height()
+        elif person_info == "age":
+            estimate_age()
+        elif person_info == "gesture" or "pose":
+            estimate_gesture_pose()
+        elif name == "name":
+            get_person_name()
+        elif person_info == "shirt color":
+            estimate_shirt_color()
         navigate(rooms_2)
         find_person()
         approach_person()
+        look_person()
         give_saved_info(saved_info)
         now_room = rooms_2
     
     elif command == "guidePrsFromBeacToBeac":
         print(command_color + f"{person}を{rooms_1}から{rooms_2}に案内する" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         あるポーズの人を見つける
@@ -611,12 +653,13 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
             find_name(person)
         elif person in person_list:
             find_pose(person,rooms_1)
+        look_person()
         guide(rooms_2)
         now_room = rooms_2
     
     elif command == "talkInfoToGestPrsInRoom":
         print(command_color + f"{rooms_1}にいる{person}に、{talk}を伝える" + RESET)
-        print(YELLOW + f"")
+        # print(YELLOW + f"")
         '''
         移動する
         あるポーズの人を見つける
@@ -629,6 +672,7 @@ def execute_command(command, obj=None, name=None, placemen=None, person=None, ta
             find_name(person)
         elif person in person_list:
             find_pose(person,rooms_1)
+        look_person()
         give_info(talk)
         now_room = rooms_1
     
@@ -848,7 +892,7 @@ def replace_unk(description):
 
     # "objects_unk" を置き換え
     while "objects_unk" in description:
-        print(result_objects)
+        # print(result_objects)
         if result_objects:
             replaced_object = result_objects.pop(0)
             description = description.replace("objects_unk", replaced_object, 1)
@@ -871,7 +915,7 @@ def replace_unk(description):
 
     # "placemen_unk" を置き換え
     while "placemen_unk" in description:
-        print("description",description)
+        # print("description",description)
         if result_placemen:
             replaced_placemen = result_placemen.pop(0)
             description = description.replace("placemen_unk", replaced_placemen, 1)
@@ -1049,8 +1093,8 @@ import time  # 時間を扱うモジュール
 start_time = time.time()
 
 # コマンド生成とカウント
-for i in range(10000):
-    print(i)
+for i in range(1):
+    # print(i)
     from config import *
     
 
@@ -1076,7 +1120,7 @@ for i in range(10000):
     result_placemen = extract_in_order_with_duplicates(input_text, placemen, special_words)
     result_person = extract_in_order_with_duplicates(input_text, person, special_words)
     result_talk = extract_in_order_with_duplicates(input_text, talk, special_words)
-    print("result_talk:", result_talk)
+    # print("result_talk:", result_talk)
 
     result_person_info = extract_in_order_with_duplicates(input_text, person_info, special_words)
     result_object_comp = extract_in_order_with_duplicates(input_text, object_comp, special_words)
@@ -1137,7 +1181,7 @@ for i in range(10000):
 
         obj_it = obj
 
-    print("\n--- 完了 ---")
+    # print("\n--- 完了 ---")
     
     # seg_num += 1
     # count = int(os.environ.get("RESTART_COUNT", "0"))
@@ -1155,4 +1199,4 @@ end_time = time.time()
 elapsed_time = end_time - start_time
 
 # 秒数を表示
-print(f"処理にかかった時間：{elapsed_time:.2f} 秒")
+# print(f"処理にかかった時間：{elapsed_time:.2f} 秒")
